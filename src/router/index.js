@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 
+import projects from '../data/projects.js';
+
 const routes = [
 	{
 		path: '/',
 		name: 'Home',
 		component: Home,
 		meta: {
-			title: 'Stoman - Home',
+			title: 'Boris - Home',
 		},
 	},
 	{
@@ -19,7 +21,7 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/About.vue'),
 		meta: {
-			title: 'Stoman - About',
+			title: 'Boris - About',
 		},
 	},
 	{
@@ -31,8 +33,20 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "projects" */ '../views/Projects.vue'),
 		meta: {
-			title: 'Stoman - Projects',
+			title: 'Boris - Projects',
 		},
+	},
+	{
+		path: '/projects/:projectId',
+		name: 'SingleProject',
+		component: () =>
+			import(/* webpackChunkName: "projects" */ '../views/SingleProject.vue'),
+		meta: {
+			title: 'Boris - Single Project',
+		},
+		props: (route) => ({
+			projectData: projects.find((project) => project.id == route.params.projectId),
+		}),
 	},
 	{
 		path: '/projects/single-project',
@@ -45,7 +59,7 @@ const routes = [
 				/* webpackChunkName: "projects" */ '../views/SingleProject.vue'
 			),
 		meta: {
-			title: 'Stoman - Single Project',
+			title: 'Boris - Single Project',
 		},
 	},
 	{
@@ -57,7 +71,7 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "projects" */ '../views/Contact.vue'),
 		meta: {
-			title: 'Stoman - Contact',
+			title: 'Boris - Contact',
 		},
 	},
 ];
